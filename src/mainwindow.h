@@ -18,8 +18,8 @@ public:
 
 public slots:
     void onChangeOutputDirectoryClicked();
-    void onAddThirdParyLibraryClicked();
-    void onRemoveThirdPartyLibraryClicked();
+    void onAddThirdParyLibraryClicked() const;
+    void onRemoveThirdPartyLibraryClicked() const;
     void onAddBuiltLibraryClicked();
     void onRemoveBuiltLibraryClicked();
     void onGenerateClicked();

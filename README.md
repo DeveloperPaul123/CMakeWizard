@@ -16,7 +16,7 @@ The goal of this program is to simplify project setup for C++ projects that use 
 * Auto configures finding of various external libraries.
 * Easily add library sub-projects that can be re-used.
 * Move existing CMake builds.
-    * This allows you to move an existing build from one directory to another without breaking the build. 
+    * This allows you to move an existing build from one directory to another without breaking the build. This is done simply by configuring the `CMakeCache` correctly. 
 * More to come!
 
 ## Contributing ##
