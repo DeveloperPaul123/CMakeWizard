@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 3.0)
 
 project(CMakeWizard LANGUAGES C CXX)
 
+list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+
+include(ApplicationVersion)
+
 find_package(Qt5 REQUIRED COMPONENTS Core Gui Widgets)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -11,10 +15,20 @@ set(project_ui_forms ui/mainwindow.ui)
 qt5_wrap_ui(ui_wrap ${project_ui_forms})
 qt5_wrap_cpp(moc_sources src/mainwindow.h)
 
-set(project_sources src/mainwindow.cpp 
-	src/main.cpp)
+set(project_sources 
+	src/mainwindow.cpp 
+	src/main.cpp
+	src/cmake_project.cpp
+	src/cmake_option.cpp
+	src/cmake_package.cpp
+	src/cmake_library.cpp)
 
-set(project_headers src/mainwindow.h)
+set(project_headers 
+	src/mainwindow.h
+	src/cmake_project.h
+	src/cmake_option.h
+	src/cmake_package.h
+	src/cmake_library.h)
 
 add_library(GUI STATIC ${ui_wrap} ${moc_sources})
 target_link_libraries(GUI Qt5::Gui Qt5::Widgets Qt5::Core)
