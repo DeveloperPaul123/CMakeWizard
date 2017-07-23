@@ -1,6 +1,7 @@
 #include <QApplication>
 #include <QCommandLineParser>
 #include <QDir>
+#include <QTextStream>
 
 #include "mainwindow.h"
 
@@ -13,6 +14,58 @@ QCoreApplication* createApplication(int &argc, char *argv[])
         return new QCoreApplication(argc, argv);
     }
 	return new QApplication(argc, argv);
+}
+
+int moveDirectory(const QString& source_dir, const QString& target_dir)
+{
+	QDir source(source_dir);
+	QDir target(target_dir);
+	
+	if (!source.exists())
+	{
+		std::cout << "Source directory: " << source_dir.toStdString() << " does not exist." << std::endl;
+		return -1;
+	}
+	if(!target.exists())
+	{
+		std::cout << "Target directory does not exist. Creating now...";
+		auto ok = target.mkpath(target_dir);
+		if (ok) {
+			std::cout << "Directory created." << std::endl;
+		}
+		else
+		{
+			std::cout << "Could not create directory." << std::endl;
+			return -1;
+		}
+	}
+
+	// check if a cmakecache exists
+	auto fullPath = QString("%1\\%2").arg(source_dir, "CMakeCache.txt");
+	QFileInfo cmake_cache_info(fullPath);
+	if(!cmake_cache_info.exists())
+	{
+		std::cout << "CMakeCache.txt does not exist in source path. Exiting." << std::endl;
+		return -1;
+	}
+	// file exists
+	QFile cmake_cache(cmake_cache_info.absolutePath());
+	if(cmake_cache.open(QIODevice::ReadOnly))
+	{
+		QTextStream stream(&cmake_cache);
+		while(!stream.atEnd())
+		{
+			QString line = stream.readLine();
+		}
+
+		cmake_cache.close();
+	}
+	else
+	{
+		std::cout << "Unable to open CMakeCache.txt file. Exiting." << std::endl;
+		return -1;
+	}
+	return 0;
 }
 
 int main(int argc, char* argv[])
@@ -57,14 +110,10 @@ int main(int argc, char* argv[])
         parser.addOption(targetDirectoryOption);
 
         parser.process(*app.data());
-        QString source_dir = parser.value(sourceDirectoryOption);
-        QDir dir(source_dir);
-        if(!dir.exists())
-        {
-//            std::cout << "Given directory: " << source_dir.toStdString() << " does not exist." << std::endl;
-            return -1;
-        }
-        return 0;
+		auto source_dir = parser.value(sourceDirectoryOption);
+		auto target_dir = parser.value(targetDirectoryOption);
+
+		return moveDirectory(source_dir, target_dir);
 	}
 
 	return app->exec();

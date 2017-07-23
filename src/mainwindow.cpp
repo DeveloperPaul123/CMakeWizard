@@ -34,13 +34,13 @@ void MainWindow::onChangeOutputDirectoryClicked()
     }
 }
 
-void MainWindow::onAddThirdParyLibraryClicked()
+void MainWindow::onAddThirdParyLibraryClicked() const
 {
     auto numRows = ui->thirdPartyLibrariesTableWidget->rowCount();
     addPackageToTable(numRows);
 }
 
-void MainWindow::onRemoveThirdPartyLibraryClicked()
+void MainWindow::onRemoveThirdPartyLibraryClicked() const
 {
     auto currentRow = ui->thirdPartyLibrariesTableWidget->currentRow();
     ui->thirdPartyLibrariesTableWidget->removeRow(currentRow);
@@ -48,6 +48,7 @@ void MainWindow::onRemoveThirdPartyLibraryClicked()
 
 void MainWindow::onAddBuiltLibraryClicked()
 {
+	// TODO: Add a way to add a library
 }
 
 void MainWindow::onRemoveBuiltLibraryClicked()
