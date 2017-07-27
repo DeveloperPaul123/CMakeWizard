@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "cmake_package.h"
+#include "CmakePackage.h"
 
 namespace Ui {
 class MainWindow;
@@ -28,7 +28,7 @@ public slots:
 
 
 private:
-    void addPackageToTable(const cmake_package &package) const;
+    void addPackageToTable(const CmakePackage &package) const;
     void addPackageToTable(const int &index) const;
     Ui::MainWindow *ui;
     void connectSignalsToSlots() const;

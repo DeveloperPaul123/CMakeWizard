@@ -1,27 +1,27 @@
-#include "cmake_package.h"
+#include "CmakePackage.h"
 
-cmake_package::cmake_package(const std::string& name, bool required, const std::string& required_version)
+CmakePackage::CmakePackage(const std::string& name, bool required, const std::string& required_version)
 {
     _name = name;
     _req = required;
     _version = required_version;
 }
 
-cmake_package::cmake_package(const cmake_package& other)
+CmakePackage::CmakePackage(const CmakePackage& other)
 {
     _name = other._name;
     _req = other._req;
     _version = other._version;
 }
 
-cmake_package::cmake_package(cmake_package&& other) noexcept
+CmakePackage::CmakePackage(CmakePackage&& other) noexcept
 {
     _name = other._name;
     _req = other._req;
     _version = other._version;  
 }
 
-cmake_package& cmake_package::operator=(const cmake_package& other)
+CmakePackage& CmakePackage::operator=(const CmakePackage& other)
 {
     _name = other._name;
     _req = other._req;
@@ -29,7 +29,7 @@ cmake_package& cmake_package::operator=(const cmake_package& other)
     return *this;
 }
 
-cmake_package& cmake_package::operator=(cmake_package&& other) noexcept
+CmakePackage& CmakePackage::operator=(CmakePackage&& other) noexcept
 {
     if(this == &other)
     {
@@ -41,22 +41,22 @@ cmake_package& cmake_package::operator=(cmake_package&& other) noexcept
     return *this;
 }
 
-std::string cmake_package::name() const
+std::string CmakePackage::name() const
 {
     return _name;
 }
 
-bool cmake_package::is_required() const
+bool CmakePackage::is_required() const
 {
     return _req;
 }
 
-std::string cmake_package::version() const
+std::string CmakePackage::version() const
 {
     return _version;
 }
 
-std::ostream& operator<<(std::ostream& stream, const cmake_package& package)
+std::ostream& operator<<(std::ostream& stream, const CmakePackage& package)
 {
     std::string required_string = package._req ? "REQUIRED" : "";
 

@@ -18,17 +18,17 @@ qt5_wrap_cpp(moc_sources src/mainwindow.h)
 set(project_sources 
 	src/mainwindow.cpp 
 	src/main.cpp
-	src/cmake_project.cpp
-	src/cmake_option.cpp
-	src/cmake_package.cpp
-	src/cmake_library.cpp)
+	src/cmakeproject.cpp
+	src/cmakeoption.cpp
+	src/cmakepackage.cpp
+	src/cmakelibrary.cpp)
 
 set(project_headers 
 	src/mainwindow.h
-	src/cmake_project.h
-	src/cmake_option.h
-	src/cmake_package.h
-	src/cmake_library.h)
+	src/cmakeproject.h
+	src/cmakeoption.h
+	src/cmakepackage.h
+	src/cmakelibrary.h)
 
 add_library(GUI STATIC ${ui_wrap} ${moc_sources})
 target_link_libraries(GUI Qt5::Gui Qt5::Widgets Qt5::Core)

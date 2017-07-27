@@ -77,13 +77,13 @@ void MainWindow::onProjectTypeChanged(int index)
         break;
     case 1:
         // qt application
-        cmake_package qt("Qt5", true, "5.9");
+        CmakePackage qt("Qt5", true, "5.9");
         addPackageToTable(qt);
         break;
     }
 }
 
-void MainWindow::addPackageToTable(const cmake_package& package) const
+void MainWindow::addPackageToTable(const CmakePackage& package) const
 {
     auto rowCount = ui->thirdPartyLibrariesTableWidget->rowCount();
     addPackageToTable(rowCount);
