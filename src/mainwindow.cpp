@@ -87,8 +87,8 @@ void MainWindow::addPackageToTable(const CmakePackage& package) const
 {
     auto rowCount = ui->thirdPartyLibrariesTableWidget->rowCount();
     addPackageToTable(rowCount);
-    ui->thirdPartyLibrariesTableWidget->item(rowCount, 0)->setText(QString::fromStdString(package.name()));
-    ui->thirdPartyLibrariesTableWidget->item(rowCount, 1)->setText(QString::fromStdString(package.version()));
+    ui->thirdPartyLibrariesTableWidget->item(rowCount, 0)->setText(package.name());
+    ui->thirdPartyLibrariesTableWidget->item(rowCount, 1)->setText(package.version());
     auto checkBox = dynamic_cast<QCheckBox*>(ui->thirdPartyLibrariesTableWidget->cellWidget(rowCount, 2));
     if(checkBox)
     {

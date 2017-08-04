@@ -21,14 +21,16 @@ set(project_sources
 	src/cmakeproject.cpp
 	src/cmakeoption.cpp
 	src/cmakepackage.cpp
-	src/cmakelibrary.cpp)
+	src/cmakelibrary.cpp
+	src/cmakebuildmover.cpp)
 
 set(project_headers 
 	src/mainwindow.h
 	src/cmakeproject.h
 	src/cmakeoption.h
 	src/cmakepackage.h
-	src/cmakelibrary.h)
+	src/cmakelibrary.h
+	src/cmakebuildmover.h)
 
 add_library(GUI STATIC ${ui_wrap} ${moc_sources})
 target_link_libraries(GUI Qt5::Gui Qt5::Widgets Qt5::Core)

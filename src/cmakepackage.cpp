@@ -1,6 +1,6 @@
 #include "CmakePackage.h"
 
-CmakePackage::CmakePackage(const std::string& name, bool required, const std::string& required_version)
+CmakePackage::CmakePackage(const QString& name, bool required, const QString& required_version)
 {
     _name = name;
     _req = required;
@@ -41,7 +41,7 @@ CmakePackage& CmakePackage::operator=(CmakePackage&& other) noexcept
     return *this;
 }
 
-std::string CmakePackage::name() const
+QString CmakePackage::name() const
 {
     return _name;
 }
@@ -51,7 +51,7 @@ bool CmakePackage::is_required() const
     return _req;
 }
 
-std::string CmakePackage::version() const
+QString CmakePackage::version() const
 {
     return _version;
 }
@@ -60,10 +60,10 @@ std::ostream& operator<<(std::ostream& stream, const CmakePackage& package)
 {
     std::string required_string = package._req ? "REQUIRED" : "";
 
-    stream << "find_package(" << package._name << " " << required_string;
+    stream << "find_package(" << package._name.toStdString() << " " << required_string;
     if (package._version.length() > 0)
     {
-        stream << " VERSION " << package._version;
+        stream << " VERSION " << package._version.toStdString();
     }
     // close the parenthesis. 
     stream << ")";

@@ -1,20 +1,21 @@
 #pragma once
 
-#include <string>
+#include <QString>
 
 class CmakePackage
 {
-    std::string _name{""};
+	QString _name{""};
     bool _req{true};
-    std::string _version{ "" };
+	QString _version{ "" };
+
 public:
-	explicit CmakePackage(const std::string &name, bool required = true, const std::string& required_version = "");
+	explicit CmakePackage(const QString &name, bool required = true, const QString& required_version = "");
 	CmakePackage(const CmakePackage& other);
     CmakePackage(CmakePackage &&other) noexcept;
 	CmakePackage& operator=(const CmakePackage& other);
     CmakePackage& operator=(CmakePackage&& other) noexcept;
-    std::string name() const;
+	QString name() const;
     bool is_required() const;
-    std::string version() const;
+	QString version() const;
     friend std::ostream& operator<<(std::ostream& stream, const CmakePackage &package);
 };

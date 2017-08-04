@@ -1,18 +1,24 @@
 #pragma once
 
-#include <string>
 #include "CmakePackage.h"
-#include <vector>
+
+#include <QList>
 
 class CmakeLibrary
 {
 public:
-	CmakeLibrary(const std::string &name, const std::vector<CmakePackage> &dependencies);
+	CmakeLibrary(const QString &name, const QList<CmakePackage> &dependencies);
 	CmakeLibrary(const CmakeLibrary & other);
     CmakeLibrary(CmakeLibrary &&other) noexcept;
 	CmakeLibrary& operator=(const CmakeLibrary &other);
     CmakeLibrary& operator=(CmakeLibrary &&other) noexcept;
+
+	void setName(const QString &name);
+	QString name() const;
+	void setPackages(const QList<CmakePackage> &packages);
+	QList<CmakePackage> packages() const;
+
 private:
-	std::string _name;
-	std::vector<CmakePackage> _deps;
+	QString _name;
+	QList<CmakePackage> _deps;
 };

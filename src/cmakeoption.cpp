@@ -1,6 +1,6 @@
 #include "CmakeOption.h"
 
-CmakeOption::CmakeOption(const std::string &name, const std::string &description, const cmake_option_state &state)
+CmakeOption::CmakeOption(const QString &name, const QString &description, const CmakeOptionState &state)
 	: _name(name), _desc(description), _state(state)
 {
 	
@@ -22,9 +22,9 @@ CmakeOption& CmakeOption::operator=(const CmakeOption& other)
 }
 
 std::ostream& operator<<(std::ostream& stream, const CmakeOption& option) {
-	cmake_option_string stringer;
-	stream << "option(" << option._name << " "
-		<< "\"" << option._desc << "\" " << stringer(option._state) <<")";
+	CmakeOptionString stringer;
+	stream << "option(" << option._name.toStdString() << " "
+		<< "\"" << option._desc.toStdString() << "\" " << stringer(option._state) <<")";
 	return stream;
 }
 

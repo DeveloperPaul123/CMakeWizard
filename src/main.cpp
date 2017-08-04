@@ -6,6 +6,7 @@
 #include "mainwindow.h"
 
 #include <iostream>
+#include "cmakebuildmover.h"
 
 
 QCoreApplication* createApplication(int &argc, char *argv[])
@@ -48,24 +49,15 @@ int moveDirectory(const QString& source_dir, const QString& target_dir)
 		std::cout << "CMakeCache.txt does not exist in source path. Exiting." << std::endl;
 		return -1;
 	}
-	// file exists
-	QFile cmake_cache(cmake_cache_info.absolutePath());
-	if(cmake_cache.open(QIODevice::ReadOnly))
-	{
-		QTextStream stream(&cmake_cache);
-		while(!stream.atEnd())
-		{
-			QString line = stream.readLine();
-		}
 
-		cmake_cache.close();
-	}
-	else
+	std::cout << "CMakeCache exists. Copying contents." << std::endl;
+	// file exists
+	auto ok = CmakeBuildMover::moveBuildDirectory(source_dir, target_dir);
+	if (!ok)
 	{
-		std::cout << "Unable to open CMakeCache.txt file. Exiting." << std::endl;
-		return -1;
+		std::cout << "Build move failed. Do you have the files open?" << std::endl;
 	}
-	return 0;
+	return ok ? 0 : -1;
 }
 
 int main(int argc, char* argv[])
