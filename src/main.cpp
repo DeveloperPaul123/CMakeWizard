@@ -4,10 +4,13 @@
 #include <QTextStream>
 
 #include "mainwindow.h"
-
-#include <iostream>
 #include "cmakebuildmover.h"
 
+#include <iostream>
+
+#include <easylogging++.h>
+
+INITIALIZE_EASYLOGGINGPP
 
 QCoreApplication* createApplication(int &argc, char *argv[])
 {
@@ -49,7 +52,6 @@ int moveDirectory(const QString& source_dir, const QString& target_dir)
 		std::cout << "CMakeCache.txt does not exist in source path. Exiting." << std::endl;
 		return -1;
 	}
-
 	std::cout << "CMakeCache exists. Copying contents." << std::endl;
 	// file exists
 	auto ok = CmakeBuildMover::moveBuildDirectory(source_dir, target_dir);
@@ -67,7 +69,7 @@ int main(int argc, char* argv[])
     app->setApplicationVersion(QString::fromStdString(CMAKE_WIZARD_VERSION));
 
 	if (qobject_cast<QApplication *>(app.data())) {
-        MainWindow * main_window = new MainWindow();
+		auto main_window = new MainWindow();
 		// start GUI version...
 		main_window->show();
 	}

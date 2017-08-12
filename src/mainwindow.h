@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "CmakePackage.h"
+#include "externalpackage.h"
 
 namespace Ui {
 class MainWindow;
@@ -32,6 +33,7 @@ private:
     void addPackageToTable(const int &index) const;
     Ui::MainWindow *ui;
     void connectSignalsToSlots() const;
+	QList<ExternalPackage> _packages;
 };
 
 #endif // MAINWINDOW_H

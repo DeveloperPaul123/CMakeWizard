@@ -2,12 +2,19 @@
 #include "ui_mainwindow.h"
 
 // standard includes
-#include <iostream>
+#include <string>
 
 // qt includes
 #include <QFileDialog>
 #include <QToolTip>
+#include <QTextStream>
 #include <QCheckBox>
+#include <QList>
+
+#include <easylogging++.h>
+#include <json.hpp>
+
+using json = nlohmann::json;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -15,7 +22,30 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 	setWindowTitle(tr("CMakeWizard"));
+	QFileInfo packages_info(":/packages/packages");
+	if(packages_info.exists())
+	{
+		LOG(INFO) << "Packages file exists.";
 
+		QFile packages(":/packages/packages");
+		if(packages.open(QIODevice::ReadOnly | QIODevice::Text))
+		{
+			QTextStream input(&packages);
+			auto string = input.readAll();
+			auto std_string = string.toStdString();
+
+			auto j = json::parse(std_string);
+			auto pakcages_array = j["packages"];
+			// iterate the array and read the external packages. 
+			for (auto it = pakcages_array.begin(); it != pakcages_array.end(); ++it) {
+				auto item = *it;
+				ExternalPackage package = item;
+				_packages.append(package);
+			}
+
+			LOG(INFO) << "Loaded " << pakcages_array.size() << " packages.";
+		}
+	}
     // setup gui connections.
     connectSignalsToSlots();
 }
@@ -72,14 +102,21 @@ void MainWindow::onProjectTypeChanged(int index)
     switch(index)
     {
     case 0:
-        // console application
-        // TODO: Remove qt5 from the table
+	{
+		// console application
+		// TODO: Remove qt5 from the table
+	}
         break;
-    case 1:
-        // qt application
-        CmakePackage qt("Qt5", true, "5.9");
-        addPackageToTable(qt);
+	case 1: {
+		// qt application
+		CmakePackage qt("Qt5", true, "5.9");
+		addPackageToTable(qt);
+	}
         break;
+    default: 
+    	{
+    }
+		break;
     }
 }
 

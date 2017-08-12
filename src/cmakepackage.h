@@ -1,11 +1,15 @@
 #pragma once
 
-#include <QString>
+#include <QStringList>
 
 class CmakePackage
 {
+	bool _req{ true };
+	bool _hasComponents{ false };
+	bool _headerOnly{ false };
+	QStringList _components;
+	QString _externalAddScript;
 	QString _name{""};
-    bool _req{true};
 	QString _version{ "" };
 
 public:
@@ -17,5 +21,12 @@ public:
 	QString name() const;
     bool is_required() const;
 	QString version() const;
+	void setComponents(const QStringList &components);
+	QStringList components() const;
+	bool hasComponents() const;
+	void setIsHeaderOnly(const bool &is_header_only);
+	bool isHeaderOnly() const;
+	void setExternalAddScript(const QString &script_path);
+	QString externalAddScript() const;
     friend std::ostream& operator<<(std::ostream& stream, const CmakePackage &package);
 };
