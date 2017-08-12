@@ -1,0 +1,44 @@
+{
+	"packages": [
+		{
+			"name" : "CUDA",
+			"versions" : ["7.5", "8.0"],
+			"hasComponents" : false,
+			"components" : [],
+			"headerOnly" : false,
+			"externalAddScript" : ""
+		},
+		{
+			"name" : "Qt5",
+			"versions" : ["5.5", "5.6", "5.7", "5.8", "5.8.1", "5.9"],
+			"hasComponents" : true,
+			"components" : ["Core", "Gui", "Widgets", "OpenGl", "PrintSupport"],
+			"headerOnly" : false,
+			"externalAddScript" : ""
+		},
+		{
+			"name" : "Eigen",
+			"versions" : [""],
+			"hasComponents" : false,
+			"components" : [""],
+			"headerOnly" : true,
+			"externalAddScript" : ""
+		},
+		{
+			"name" : "EasyLogging++",
+			"versions" : [""],
+			"hasComponents" : false,
+			"components" : [""],
+			"headerOnly" : true,
+			"externalAddScript" : ""
+		},
+		{
+			"name" : "OpenGL",
+			"versions" : [""],
+			"hasComponents" : false,
+			"components" : [""],
+			"headerOnly" : false,
+			"externalAddScript" : ""
+		}
+	]
+}
